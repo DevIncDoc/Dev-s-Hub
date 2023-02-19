@@ -263,7 +263,7 @@ Numbers:AddSlider({
 	Name = "ClockTime",
 	Min = 0,
 	Max = 23,
-	Default = HightLightFillTransparency,
+	Default = LightingService.ClockTime,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 0.05,
 	ValueName = "",

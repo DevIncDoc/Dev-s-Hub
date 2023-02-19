@@ -219,14 +219,14 @@ Colors:AddLabel("Ambient")
 
 Colors:AddColorpicker({
 	Name = "Ambient",
-	Default = Color3.fromRGB(LightingService.Ambient) or Color3.fromRGB(220,220,220),
+	Default = LightingService.Ambient
 	Callback = function(Value)
 		LightingService.Ambient = Value
 	end	  
 })
 Colors:AddColorpicker({
 	Name = "OutdoorAmbient",
-	Default = Color3.fromRGB(LightingService.OutdoorAmbient) or Color3.fromRGB(220,220,220),
+	Default = LightingService.OutdoorAmbient
 	Callback = function(Value)
 		LightingService.OutdoorAmbient = Value
 	end	  
@@ -235,7 +235,7 @@ Colors:AddColorpicker({
 Colors:AddLabel("FOG")
 Colors:AddColorpicker({
 	Name = "FogColor",
-	Default = Color3.fromRGB(LightingService.FogColor),
+	Default = LightingService.FogColor,
 	Callback = function(Value)
 		LightingService.FogColor = Value
 	end	  

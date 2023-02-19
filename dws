@@ -219,14 +219,14 @@ Colors:AddLabel("Ambient")
 
 Colors:AddColorpicker({
 	Name = "Ambient",
-	Default = Color3.fromRGB(LightingService.Ambient),
+	Default = Color3.fromRGB(LightingService.Ambient) or Color3.fromRGB(220,220,220),
 	Callback = function(Value)
 		LightingService.Ambient = Value
 	end	  
 })
 Colors:AddColorpicker({
 	Name = "OutdoorAmbient",
-	Default = Color3.fromRGB(LightingService.OutdoorAmbient),
+	Default = Color3.fromRGB(LightingService.OutdoorAmbient) or Color3.fromRGB(220,220,220),
 	Callback = function(Value)
 		LightingService.OutdoorAmbient = Value
 	end	  
@@ -259,17 +259,21 @@ Numbers:AddTextbox({
 		LightingService.Brightness = tonumber(Value)
 	end	  
 })
-Numbers:AddSlider({
-	Name = "ClockTime",
-	Min = 0,
-	Max = 23,
-	Default = LightingService.ClockTime,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 0.05,
-	ValueName = "",
+Numbers:AddTextbox({
+	Name = "ShadowSoftness",
+	Default = tostring(LightingService.ShadowSoftness),
+	TextDisappear = false,
 	Callback = function(Value)
-		LightingService.ClockTime = Value
-	end    
+		LightingService.ShadowSoftness = tonumber(Value)
+	end	  
+})
+Numbers:AddTextbox({
+	Name = "ClockTime",
+	Default = tostring(LightingService.ClockTime),
+	TextDisappear = false,
+	Callback = function(Value)
+		LightingService.ClockTime = tonumber(Value)
+	end	  
 })
 Numbers:AddTextbox({
 	Name = "GeographicLatitude",

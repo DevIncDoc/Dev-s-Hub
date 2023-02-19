@@ -1,0 +1,563 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({
+Name = "Dev's HUB", 
+HidePremium = false, 
+SaveConfig = true, 
+ConfigFolder = "Configurations",
+IntroText = "Dev's HUB"})
+
+OrionLib:MakeNotification({
+	Name = "Gui Loaded!",
+	Content = "Gui Loaded",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+--[[
+Title = <string> - The title of the notification.
+Content = <string> - The content of the notification.
+Image = <string> - The icon of the notification.
+Time = <number> - The duration of the notfication.
+]]
+
+--[[
+Name = <string> - The name of the UI.
+HidePremium = <bool> - Whether or not the user details shows Premium status or not.
+SaveConfig = <bool> - Toggles the config saving in the UI.
+ConfigFolder = <string> - The name of the folder where the configs are saved.
+IntroEnabled = <bool> - Whether or not to show the intro animation.
+IntroText = <string> - Text to show in the intro animation.
+IntroIcon = <string> - URL to the image you want to use in the intro animation.
+Icon = <string> - URL to the image you want displayed on the window.
+CloseCallback = <function> - Function to execute when the window is closed.
+]]
+
+local LocalPlayer = Window:MakeTab({
+	Name = "Local Player",
+	Icon = "rbxassetid://12544526082",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+
+local Character = LocalPlayer:AddSection({
+	Name = "Character"
+})
+
+--[[
+Name = <string> - The name of the section.
+]]
+
+local WalkSpeed = 16
+Character:AddSlider({
+	Name = "Walk Speed",
+	Min = 16,
+	Max = 350,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "",
+	Callback = function(Value)
+		WalkSpeed = Value
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeed
+	end    
+})
+
+--[[
+Name = <string> - The name of the slider.
+Min = <number> - The minimal value of the slider.
+Max = <number> - The maxium value of the slider.
+Increment = <number> - How much the slider will change value when dragging.
+Default = <number> - The default value of the slider.
+ValueName = <string> - The text after the value number.
+Callback = <function> - The function of the slider.
+]]
+
+local JumpPower = 50
+Character:AddSlider({
+	Name = "Jump Power",
+	Min = 50,
+	Max = 550,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "",
+	Callback = function(Value)
+		JumpPower = Value
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
+	end    
+})
+
+--[[
+Name = <string> - The name of the slider.
+Min = <number> - The minimal value of the slider.
+Max = <number> - The maxium value of the slider.
+Increment = <number> - How much the slider will change value when dragging.
+Default = <number> - The default value of the slider.
+ValueName = <string> - The text after the value number.
+Callback = <function> - The function of the slider.
+]]
+
+local TorsoAnchored = false
+Character:AddToggle({
+	Name = "Anchor RootPart",
+	Default = false,
+	Callback = function(Value)
+		TorsoAnchored = Value
+		game.Players.LocalPlayer.Character.Humanoid.RootPart.Anchored = TorsoAnchored
+	end    
+})
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+Character:AddButton({
+	Name = "Reset Character",
+	Callback = function()
+      	game.Players.LocalPlayer.Character.Humanoid.Health = 0
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+local OtherCharacter = LocalPlayer:AddSection({
+	Name = "Other Character Cheats"
+})
+
+local InfJump = false
+OtherCharacter:AddToggle({
+	Name = "Infinite Jump",
+	Default = false,
+	Callback = function(Value)
+		InfJump = Value
+	end    
+})
+
+OtherCharacter:AddParagraph("TP","TP Content")
+local TPEnabled = false
+OtherCharacter:AddBind({
+	Name = "TP KeyBind",
+	Default = Enum.KeyCode.F,
+	Hold = false,
+	Callback = function()
+		if TPEnabled then
+			local mouse = game.Players.LocalPlayer:GetMouse()
+			
+			local pos = mouse.Hit+Vector3.new(0,2.5,0)
+			pos = CFrame.new(pos.X,pos.Y,pos.Z)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+		end
+	end    
+})
+OtherCharacter:AddToggle({
+	Name = "TPEnabled",
+	Default = false,
+	Callback = function(Value)
+		TPEnabled = Value
+	end    
+})
+
+
+game:GetService("UserInputService").JumpRequest:Connect(function()
+	if InfJump == true and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+		game.Players.LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+	end
+end)
+
+--[[
+local Visual = Window:MakeTab({
+	Name = "Visual",
+	Icon = "",
+	PremiumOnly = false
+})
+]]--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local LightingService = game.Lighting
+
+local Lighting = Window:MakeTab({
+	Name = "Lighting",
+	Icon = "rbxassetid://12544537995",
+	PremiumOnly = false
+})
+
+local Colors = Lighting:AddSection({
+	Name = "Colors"
+})
+
+Colors:AddLabel("Ambient")
+
+Colors:AddColorpicker({
+	Name = "Ambient",
+	Default = Color3.fromRGB(LightingService.Ambient),
+	Callback = function(Value)
+		LightingService.Ambient = Value
+	end	  
+})
+Colors:AddColorpicker({
+	Name = "OutdoorAmbient",
+	Default = Color3.fromRGB(LightingService.OutdoorAmbient),
+	Callback = function(Value)
+		LightingService.OutdoorAmbient = Value
+	end	  
+})
+
+Colors:AddLabel("FOG")
+Colors:AddColorpicker({
+	Name = "FogColor",
+	Default = Color3.fromRGB(LightingService.FogColor),
+	Callback = function(Value)
+		LightingService.FogColor = Value
+	end	  
+})
+--[[
+Name = <string> - The name of the colorpicker.
+Default = <color3> - The default value of the colorpicker.
+Callback = <function> - The function of the colorpicker.
+]]
+
+local Numbers = Lighting:AddSection({
+	Name = "Numbers"
+})
+
+Numbers:AddLabel("Sun and shadows")
+Numbers:AddTextbox({
+	Name = "Brightness",
+	Default = tostring(LightingService.Brightness),
+	TextDisappear = false,
+	Callback = function(Value)
+		LightingService.Brightness = tonumber(Value)
+	end	  
+})
+Numbers:AddTextbox({
+	Name = "ShadowSoftness",
+	Default = tostring(LightingService.ShadowSoftness),
+	TextDisappear = false,
+	Callback = function(Value)
+		LightingService.ShadowSoftness = tonumber(Value)
+	end	  
+})
+Numbers:AddTextbox({
+	Name = "ClockTime",
+	Default = tostring(LightingService.ClockTime),
+	TextDisappear = false,
+	Callback = function(Value)
+		LightingService.ClockTime = tonumber(Value)
+	end	  
+})
+Numbers:AddTextbox({
+	Name = "GeographicLatitude",
+	Default = tostring(LightingService.GeographicLatitude),
+	TextDisappear = false,
+	Callback = function(Value)
+		LightingService.GeographicLatitude = tonumber(Value)
+	end	  
+})
+
+Numbers:AddLabel("FOG")
+Numbers:AddTextbox({
+	Name = "FogEnd",
+	Default = tostring(LightingService.FogEnd),
+	TextDisappear = false,
+	Callback = function(Value)
+		LightingService.FogEnd = tonumber(Value)
+	end	  
+})
+Numbers:AddTextbox({
+	Name = "FogStart",
+	Default = tostring(LightingService.FogStart),
+	TextDisappear = false,
+	Callback = function(Value)
+		LightingService.FogStart = tonumber(Value)
+	end	  
+})
+--[[
+Name = <string> - The name of the textbox.
+Default = <string> - The default value of the textbox.
+TextDisappear = <bool> - Makes the text disappear in the textbox after losing focus.
+Callback = <function> - The function of the textbox.
+]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local View = Window:MakeTab({
+	Name = "Visuals",
+	Icon = "rbxassetid://12545149055",
+	PremiumOnly = false
+})
+
+local ESP = View:AddSection({
+	Name = "ESP"
+})
+
+local ESPProps = {}
+
+local ESPEnabled = false
+
+local HightLightEnabled = true
+local HightLightOutlineColor = Color3.fromRGB(255,255,255)
+local HightLightOutlineTransparency = 0
+local HightLightFillColor = Color3.fromRGB(255,255,255)
+local HightLightFillTransparency = 0
+
+local GuiEnabled = true
+local GuiColor = Color3.fromRGB(255,255,255)
+local GuiStrokeColor = Color3.fromRGB(0,0,0)
+local GuiStrokeTransparency = 0
+
+ESP:AddToggle({
+	Name = "ESP Enabled",
+	Default = false,
+	Callback = function(Value)
+		ESPEnabled = Value
+	end    
+})
+ESP:AddButton({
+	Name = "Update ESP",
+	Callback = function()
+		if ESPEnabled == true then
+			ESPEnabled = false
+	      	wait(0.1)
+	      	ESPEnabled = true
+		end
+  	end    
+})
+
+
+ESP:AddLabel("ESP Hightlight")
+ESP:AddToggle({
+	Name = "HightLight Enabled",
+	Default = HightLightEnabled,
+	Callback = function(Value)
+		HightLightEnabled = Value
+	end    
+})
+ESP:AddColorpicker({
+	Name = "Hightlight OutlineColor",
+	Default = HightLightOutlineColor,
+	Callback = function(Value)
+		HightLightOutlineColor = Value
+	end	  
+})
+ESP:AddColorpicker({
+	Name = "Hightlight FillColor",
+	Default = HightLightFillColor,
+	Callback = function(Value)
+		HightLightFillColor = Value
+	end	  
+})
+ESP:AddSlider({
+	Name = "Hightlight OutlineTransparency",
+	Min = 0,
+	Max = 1,
+	Default = HightLightOutlineTransparency,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.01,
+	ValueName = "",
+	Callback = function(Value)
+		HightLightOutlineTransparency = Value
+	end    
+})
+ESP:AddSlider({
+	Name = "Hightlight FillTransparency",
+	Min = 0,
+	Max = 1,
+	Default = HightLightFillTransparency,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.01,
+	ValueName = "",
+	Callback = function(Value)
+		HightLightFillTransparency = Value
+	end    
+})
+
+
+ESP:AddLabel("ESP Gui")
+
+ESP:AddToggle({
+	Name = "Gui Enabled",
+	Default = GuiEnabled,
+	Callback = function(Value)
+		GuiEnabled = Value
+	end    
+})
+ESP:AddColorpicker({
+	Name = "Gui OutlineColor",
+	Default = GuiColor,
+	Callback = function(Value)
+		GuiColor = Value
+	end	  
+})
+ESP:AddColorpicker({
+	Name = "Gui StrokeColor",
+	Default = GuiStrokeColor,
+	Callback = function(Value)
+		GuiStrokeColor = Value
+	end	  
+})
+ESP:AddSlider({
+	Name = "Gui Stroke Transparency",
+	Min = 0,
+	Max = 1,
+	Default = GuiStrokeTransparency,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.01,
+	ValueName = "",
+	Callback = function(Value)
+		GuiStrokeTransparency = Value
+	end    
+})
+
+
+
+
+
+
+
+
+
+
+repeat 
+for i,v in pairs (game.Workspace:GetDescendants()) do
+			if v:IsA("Humanoid") then
+				local Character = v.Parent
+				if Character ~= game.Workspace and Character ~= game.Players.LocalPlayer.Character then
+
+					if ESPEnabled == true then
+							if not table.find(ESPProps,{Char = Character}) then
+									local t = {
+										Char = Character,
+										
+										G = nil,
+										HL = nil,
+									}
+									
+									if HightLightEnabled and not Character:FindFirstChild("46y9jimb49mj4b6406b96by90b460b00076bu9mjnjm79bn69b6796") then 
+										local HightLight = Instance.new("Highlight",Character)
+										HightLight.OutlineColor = HightLightOutlineColor
+										HightLight.OutlineTransparency = HightLightOutlineTransparency
+										HightLight.Name = "46y9jimb49mj4b6406b96by90b460b00076bu9mjnjm79bn69b6796"
+										
+										HightLight.FillColor = HightLightFillColor
+										HightLight.FillTransparency = HightLightFillTransparency
+										t.HL = HightLight
+										
+									elseif HightLightEnabled == false and Character:FindFirstChild("46y9jimb49mj4b6406b96by90b460b00076bu9mjnjm79bn69b6796") then
+										
+										Character:FindFirstChild("46y9jimb49mj4b6406b96by90b460b00076bu9mjnjm79bn69b6796"):Destroy()
+									end
+			
+									if GuiEnabled and  not Character:FindFirstChild("erfio00gvkv45v8m9v4c")  then
+										local BillboardGui = Instance.new("BillboardGui")
+										local TextLabel = Instance.new("TextLabel")
+										
+										--Properties:
+										
+										BillboardGui.Name = "erfio00gvkv45v8m9v4c"
+										BillboardGui.Parent = Character
+										BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+										BillboardGui.Active = true
+										BillboardGui.AlwaysOnTop = true
+										BillboardGui.LightInfluence = 1.000
+										BillboardGui.Size = UDim2.new(10, 0, 1.5, 0)
+										BillboardGui.StudsOffsetWorldSpace = Vector3.new(0, 3.700000047683716, 0)
+			
+										TextLabel.Parent = BillboardGui
+										TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+										TextLabel.BackgroundTransparency = 1.000
+										TextLabel.Size = UDim2.new(1, 0, 1, 0)
+										TextLabel.Font = Enum.Font.SourceSansBold
+										TextLabel.Text = Character.Name
+										TextLabel.TextColor3 = GuiColor
+										TextLabel.TextScaled = true
+										TextLabel.TextSize = 14.000
+										TextLabel.TextWrapped = true
+										TextLabel.TextStrokeColor3 = GuiStrokeColor
+										TextLabel.TextStrokeTransparency = GuiStrokeTransparency
+										t.G = TextLabel
+										
+									elseif GuiEnabled == false and Character:FindFirstChild("erfio00gvkv45v8m9v4c")  then
+									
+										Character:FindFirstChild("erfio00gvkv45v8m9v4c"):Destroy()
+									end
+			
+									table.insert(ESPProps,t)
+								end
+								
+					else
+						
+						local F1 = Character:FindFirstChild("46y9jimb49mj4b6406b96by90b460b00076bu9mjnjm79bn69b6796")
+						if F1 then
+							F1:Destroy()
+						end
+						
+						local F2 = Character:FindFirstChild("erfio00gvkv45v8m9v4c")
+						if F2 then
+							F2:Destroy()
+						end
+					end	
+					
+				end
+			end
+		end
+
+
+
+
+
+
+
+
+
+
+
+	wait(0.15)
+until false
+
+
+
+
+
+OrionLib:Init()

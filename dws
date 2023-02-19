@@ -544,14 +544,15 @@ for i,v in pairs (game.Workspace:GetDescendants()) do
 		end
 
 
+	
 
 
 
+		game.Players.LocalPlayer.Character.Humanoid.RootPart.Anchored = TorsoAnchored
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeed
 
-
-
-
-
+	
 
 	wait(0.15)
 until false

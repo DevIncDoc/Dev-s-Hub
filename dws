@@ -219,14 +219,14 @@ Colors:AddLabel("Ambient")
 
 Colors:AddColorpicker({
 	Name = "Ambient",
-	Default = LightingService.Ambient
+	Default = LightingService.Ambient,
 	Callback = function(Value)
 		LightingService.Ambient = Value
 	end	  
 })
 Colors:AddColorpicker({
 	Name = "OutdoorAmbient",
-	Default = LightingService.OutdoorAmbient
+	Default = LightingService.OutdoorAmbient,
 	Callback = function(Value)
 		LightingService.OutdoorAmbient = Value
 	end	  

@@ -490,9 +490,18 @@ Scripts:AddButton({
 		loadstring(game:HttpGet("https://pastebin.com/raw/0MLPL32f",true))();
   	end    
 })
-
-
-
+Scripts:AddButton({
+	Name = "Infinite Yield",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/eLBNJSRX",true))();
+  	end    
+})
+Scripts:AddButton({
+	Name = "CHAOS Script",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/1111-ssss/Chaos_Script/main/Chaos_script.txt'))()
+  	end    
+})
 
 
 

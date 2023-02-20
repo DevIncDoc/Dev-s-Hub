@@ -267,14 +267,19 @@ Numbers:AddTextbox({
 		LightingService.ShadowSoftness = tonumber(Value)
 	end	  
 })
-Numbers:AddTextbox({
+Numbers:AddSlider({
 	Name = "ClockTime",
-	Default = tostring(LightingService.ClockTime),
-	TextDisappear = false,
+	Min = 0,
+	Max = 23,
+	Default = LightingService.ClockTime,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.01,
+	ValueName = "",
 	Callback = function(Value)
-		LightingService.ClockTime = tonumber(Value)
-	end	  
+		LightingService.ClockTime = Value
+	end    
 })
+
 Numbers:AddTextbox({
 	Name = "GeographicLatitude",
 	Default = tostring(LightingService.GeographicLatitude),
@@ -452,6 +457,39 @@ ESP:AddSlider({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local OthersSc = Window:MakeTab({
+	Name = "Others Scripts",
+	Icon = "",
+	PremiumOnly = false
+})
+
+local Scripts = OthersSc:AddSection({
+	Name = "Scripts"
+})
+
+Scripts:AddButton({
+	Name = "Energize Gui",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/0MLPL32f",true))();
+  	end    
+})
 
 
 

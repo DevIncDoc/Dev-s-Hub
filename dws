@@ -91,7 +91,6 @@ Character:AddSlider({
 		game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
 	end    
 })
-
 --[[
 Name = <string> - The name of the slider.
 Min = <number> - The minimal value of the slider.
@@ -429,7 +428,7 @@ ESP:AddToggle({
 	end    
 })
 ESP:AddColorpicker({
-	Name = "Gui OutlineColor",
+	Name = "Gui Text Color",
 	Default = GuiColor,
 	Callback = function(Value)
 		GuiColor = Value
@@ -476,7 +475,7 @@ ESP:AddSlider({
 
 local OthersSc = Window:MakeTab({
 	Name = "Others Scripts",
-	Icon = "",
+	Icon = "rbxassetid://12558535650",--12555409729
 	PremiumOnly = false
 })
 
@@ -502,13 +501,106 @@ Scripts:AddButton({
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/1111-ssss/Chaos_Script/main/Chaos_script.txt'))()
   	end    
 })
+Scripts:AddButton({
+	Name = "Mortem Metallum Script",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/AtP32hJt",true))();
+  	end    
+})
 
+local Camera = Window:MakeTab({
+	Name = "Camera",
+	Icon = "rbxassetid://",--12555409729
+	PremiumOnly = false
+})
 
+local Camera2 = Camera:AddSection({
+	Name = "Camera"
+})
 
-
+Camera2:AddTextbox({
+	Name = "MaxZoomDist",
+	Default = game.Players.LocalPlayer.CameraMaxZoomDistance,
+	TextDisappear = false,
+	Callback = function(Value)
+		game.Players.LocalPlayer.CameraMaxZoomDistance = tonumber(Value)
+	end	  
+})
+Camera2:AddTextbox({
+	Name = "MinZoomDist",
+	Default = game.Players.LocalPlayer.CameraMinZoomDistance,
+	TextDisappear = false,
+	Callback = function(Value)
+		game.Players.LocalPlayer.CameraMaxZoomDistance = tonumber(Value)
+	end	  
+})
+Camera2:AddSlider({
+	Name = "FieldOfView",
+	Min = 1,
+	Max = 120,
+	Default = game.Workspace.CurrentCamera.FieldOfView,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.5,
+	ValueName = "",
+	Callback = function(Value)
+		game.Workspace.CurrentCamera.FieldOfView = Value
+	end    
+})
+Camera2:AddDropdown({
+	Name = "CameraMode",
+	Default = game.Players.LocalPlayer.CameraMode,
+	Options = {"Classic", "LockFirstPerson"},
+	Callback = function(Value)
+		game.Players.LocalPlayer.CameraMode = Value
+	end    
+})
+Camera2:AddDropdown({
+	Name = "CameraOcclusionMode",
+	Default = game.Players.LocalPlayer.DevCameraOcclusionMode,
+	Options = {"Zoom", "Invisicam"},
+	Callback = function(Value)
+		game.Players.LocalPlayer.DevCameraOcclusionMode = Value
+	end    
+})
+Camera2:AddDropdown({
+	Name = "DevComputerCameraMode",
+	Default = game.Players.LocalPlayer.DevComputerCameraMode,
+	Options = {
+               "CameraToggle",
+               "Classic",
+               "Follow",
+               "Orbital",
+               "UserChoice",
+              },
+	Callback = function(Value)
+		game.Players.LocalPlayer.DevComputerCameraMode = Value
+	end    
+})
+Camera2:AddDropdown({
+	Name = "CameraType",
+	Default = workspace.CurrentCamera.CameraType,
+	Options = {
+              "Fixed",
+              "Watch",
+              "Attach",
+              "Track",
+              "Follow",
+              "Custom",
+              "Scriptable",
+              "Orbital",
+              },
+	Callback = function(Value)
+		workspace.CurrentCamera.CameraType = Value
+	end    
+})
+                    
+                    
 repeat 
 for i,v in pairs (game.Workspace:GetDescendants()) do
-			if v:IsA("Humanoid") then
+	--pcall(function()
+		
+		if v:IsA("Humanoid") then
+			--pcall(function ()
 				local Character = v.Parent
 				if Character ~= game.Workspace and Character ~= game.Players.LocalPlayer.Character then
 
@@ -588,19 +680,10 @@ for i,v in pairs (game.Workspace:GetDescendants()) do
 					
 				end
 			end
+			--end)
 		end
 
-
-	
-
-
-
-		game.Players.LocalPlayer.Character.Humanoid.RootPart.Anchored = TorsoAnchored
-		game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeed
-
-	
-
+--	end)
 	wait(0.15)
 until false
 

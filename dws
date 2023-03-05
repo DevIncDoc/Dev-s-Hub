@@ -510,7 +510,7 @@ Scripts:AddButton({
 
 local Camera = Window:MakeTab({
 	Name = "Camera",
-	Icon = "rbxassetid://",--12555409729
+	Icon = "rbxassetid://12694968783",--12555409729
 	PremiumOnly = false
 })
 

@@ -57,7 +57,7 @@ Character:AddSlider({
 	Name = "Walk Speed",
 	Min = 16,
 	Max = 350,
-	Default = 16,
+	Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
 	ValueName = "",
@@ -82,7 +82,7 @@ Character:AddSlider({
 	Name = "Jump Power",
 	Min = 50,
 	Max = 550,
-	Default = 50,
+	Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
 	ValueName = "",
@@ -507,6 +507,13 @@ Scripts:AddButton({
 		loadstring(game:HttpGet("https://pastebin.com/raw/AtP32hJt",true))();
   	end    
 })
+Scripts:AddButton({
+	Name = "Arsenal Script",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/CriShoux/OwlHub/master/OwlHub.txt"))();
+  	end    
+})
+
 
 local Camera = Window:MakeTab({
 	Name = "Camera",
